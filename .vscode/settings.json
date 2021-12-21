@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "**/*.html": "django-html"
+  },
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  "beautify.language": {
+    "html": ["htm", "html", "django-html"]
+  }
+}

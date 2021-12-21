@@ -49,3 +49,24 @@ select:focus {
 .form_group .errorlist {
   @apply text-red-600;
 }
+
+.logo, .nav-link {
+  @apply px-4 py-3
+    hover:bg-gray-300 rounded-lg;
+}
+
+.logo {
+  @apply mt-4 font-bold;
+}
+
+.nav-link {
+  @apply flex items-center gap-4;
+}
+
+.nav-link__text {
+  @apply hidden lg:block;
+}
+
+.nav-link__icon > svg {
+  @apply fill-current w-6 h-6;
+}

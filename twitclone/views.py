@@ -3,18 +3,21 @@ from django.views.generic import TemplateView, FormView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
-
+from django.contrib.auth import logout
 
 from .forms import SignupForm, LoginForm
 from .mixins import UserIsAnonymousMixin
 
+
 class LandingPageView(UserIsAnonymousMixin, TemplateView):
     template_name = 'twitclone/landing_page.html'
+
 
 class LoginView(UserIsAnonymousMixin, FormView):
     template_name = 'twitclone/login.html'
     form_class = LoginForm
     success_url = '/home/'
+
 
 class SignupView(UserIsAnonymousMixin, FormView):
     template_name = 'twitclone/signup.html'
@@ -28,6 +31,12 @@ class SignupView(UserIsAnonymousMixin, FormView):
         user = authenticate(username=username, password=password)
         login(self.request, user)
         return HttpResponseRedirect(self.success_url)
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
 
 @login_required(login_url='/login/')
 def homepage(request):

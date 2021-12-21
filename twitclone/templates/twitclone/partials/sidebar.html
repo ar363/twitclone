@@ -1,0 +1,92 @@
+<nav class="lg:basis-72 flex-shrink-0 h-screen flex flex-col justify-between md:pr-2 border-r-2 border-r-gray-300">
+    <div class="flex flex-col gap-2">
+        <a href="/home/" class="logo">
+            <div class="block lg:hidden text-3xl">Q</div>
+            <div class="hidden lg:block text-lg">Quack</div>
+        </a>
+        <a href="/home/" class="nav-link">
+            <div class="nav-link__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" />
+                </svg>
+            </div>
+            <div class="nav-link__text">Home</div>
+        </a>
+        <a href="/home/" class="nav-link">
+            <div class="nav-link__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5l7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z" />
+                </svg>
+            </div>
+            <div class="nav-link__text">Explore</div>
+        </a>
+        <a href="/home/" class="nav-link">
+            <div class="nav-link__icon">
+
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                        d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
+                </svg>
+            </div>
+            <div class="nav-link__text">Notifications</div>
+        </a>
+        <a href="/home/" class="nav-link">
+            <div class="nav-link__icon">
+
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z" />
+                </svg>
+            </div>
+            <div class="nav-link__text">Profile</div>
+        </a>
+        <a href="/home/" class="nav-link nav-link--primary">
+            <div class="nav-link__icon">
+
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                        d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
+                </svg>
+            </div>
+            <div class="nav-link__text">Compose</div>
+        </a>
+    </div>
+    <div class="flex items-center justify-center lg:justify-between py-4 lg:p-4">
+        <div class="flex items-center gap-4">
+            <div class="">
+                {% if user.profile_photo %}
+                <img src="{{ user.profile_photo.url }}" alt="@{{ user.username }}'s profile picture"
+                    class="w-6 h-6 lg:w-12 lg:h-12 object-cover rounded-full" />
+                {% else %}
+                <img src="https://pfpgen.deta.dev/?username={{ user.username | urlencode }}&name={{ user.get_full_name | urlencode }}"
+                    alt="@{{ user.username }}'s profile picture" class="w-12 h-12 object-cover rounded-full" />
+                {% endif %}
+            </div>
+            <div class="hidden lg:block">
+                <div class="font-bold">
+                    {% if user.get_full_name %}
+                    {{ user.get_full_name }}
+                    {% else %}
+                    {{ user.username }}
+                    {% endif %}
+                </div>
+                <div class="text-sm">
+                    @{{ user.username }}
+                </div>
+            </div>
+        </div>
+        <div class="hidden lg:block">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                    d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+            </svg>
+        </div>
+    </div>
+</nav>
