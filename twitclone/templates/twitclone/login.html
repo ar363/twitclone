@@ -7,7 +7,15 @@
     <img src="{% static 'twitclone/img/landing.jpg' %}" alt="" class="w-full h-full fixed top-0 left-0 -z-10">
     <div class="p-12 max-w-md mx-auto bg-white bg-opacity-80 rounded max-h-screen overflow-auto">
         <h1 class="text-4xl font-semibold mb-6">Login</h1>
-        <form action="" method="post">
+        <div class="flex flex-col gap-4">
+            <a href="{% url "social:begin" "google-oauth2" %}" class="text-center shadow bg-[#4285f4] text-white px-8 py-4 rounded font-semibold">Log in with Google</a>
+            <a href="{% url "social:begin" "github" %}" class="text-center shadow bg-[#333] text-white px-8 py-4 rounded font-semibold">Log in with Github</a>
+        </div>
+        <div class="mt-12 relative flex items-center justify-center">
+            <hr class="border-t-2 border-dashed border-t-teal-600 w-full">
+            <p class="font-bold bg-teal-600 text-white p-1 text-xs inline-block rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">OR</p>
+        </div>
+        <form class="mt-12" action="" method="post">
             {% csrf_token %}
 
             {% for field in form %}
