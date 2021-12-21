@@ -3,7 +3,50 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.core.validators import RegexValidator
 
 class UserManager(BaseUserManager):
-    pass
+    def create_user(self, username, email, password=None,is_active=True,is_staff=False,is_admin=False):
+        """
+        Creates and saves a User with the given email and password.
+        """
+        
+        if not username:
+            raise ValueError('User must have a username')
+
+        user = self.model(
+            username=username,
+            email=self.normalize_email(email),
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_staffuser(self, username, email, password):
+        """
+        Creates and saves a staff user with the given email and password.
+        """
+        user = self.create_user(
+            username,
+            email,
+            password=password,
+        )
+        user.staff = True
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, email, password):
+        """
+        Creates and saves a superuser with the given email and password.
+        """
+        user = self.create_user(
+            username,
+            email,
+            password=password,
+        )
+        user.staff = True
+        user.admin = True
+        user.save(using=self._db)
+        return user
+
 
 class User(AbstractUser):
     username = models.CharField(max_length=36, unique=True, validators=[
