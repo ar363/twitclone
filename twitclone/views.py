@@ -1,10 +1,14 @@
-from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.shortcuts import render
 from django.views.generic import TemplateView, FormView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
+
 
 from .forms import SignupForm, LoginForm
 from .mixins import UserIsAnonymousMixin
 
-class LandingPageView(TemplateView):
+class LandingPageView(UserIsAnonymousMixin, TemplateView):
     template_name = 'twitclone/landing_page.html'
 
 class LoginView(UserIsAnonymousMixin, FormView):
@@ -16,3 +20,15 @@ class SignupView(UserIsAnonymousMixin, FormView):
     template_name = 'twitclone/signup.html'
     form_class = SignupForm
     success_url = '/home/'
+
+    def form_valid(self, form):
+        form.save()
+        username = self.request.POST['username']
+        password = self.request.POST['password1']
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
+        return HttpResponseRedirect(self.success_url)
+
+@login_required(login_url='/login/')
+def homepage(request):
+    return render(request, 'twitclone/home.html', {})
