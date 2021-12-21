@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.turbo-progress-bar {
+  @apply bg-teal-600;
+}
+
 .form_group {
   @apply mb-4;
 }

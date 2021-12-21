@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
@@ -7,6 +7,7 @@ from django.contrib.auth import logout
 
 from .forms import SignupForm, LoginForm
 from .mixins import UserIsAnonymousMixin
+from .generic import FormView
 
 
 class LandingPageView(UserIsAnonymousMixin, TemplateView):
@@ -17,6 +18,13 @@ class LoginView(UserIsAnonymousMixin, FormView):
     template_name = 'twitclone/login.html'
     form_class = LoginForm
     success_url = '/home/'
+
+    def form_valid(self, form):
+        username = self.request.POST['username']
+        password = self.request.POST['password']
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
+        return HttpResponseRedirect(self.success_url)
 
 
 class SignupView(UserIsAnonymousMixin, FormView):
