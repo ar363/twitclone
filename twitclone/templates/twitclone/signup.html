@@ -1,0 +1,35 @@
+{% extends 'twitclone/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="flex items-center justify-center h-screen text-gray-800">
+    <img src="{% static 'twitclone/img/landing.jpg' %}" alt="" class="w-full h-full fixed top-0 left-0 -z-10">
+    <div class="p-12 max-w-md mx-auto bg-white bg-opacity-80 rounded max-h-screen overflow-auto">
+        <h1 class="text-4xl font-semibold mb-6">Signup</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            
+            {% for field in form %}
+            <div class="form_group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                <div class="text-xs text-gray-700">{{ field.help_text }}</div>
+                {% endif %}
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="bg-red-600 text-white p-4 rounded mb-4">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <button type="submit" class="bg-teal-700 text-white font-semibold rounded w-full px-4 py-3">Login</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,6 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.core.validators import RegexValidator
+
+class UserManager(BaseUserManager):
+    pass
 
 class User(AbstractUser):
     username = models.CharField(max_length=36, unique=True, validators=[
@@ -9,6 +12,8 @@ class User(AbstractUser):
     email = models.EmailField()
     bio = models.TextField(max_length=280)
     profile_picture = models.ImageField()
+
+    objects = UserManager()
 
 
 class Tweet(models.Model):

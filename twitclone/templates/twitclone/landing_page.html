@@ -11,8 +11,12 @@
         <div class="flex flex-col gap-4 mt-12 w-full ">
             <button class="shadow bg-[#4285f4] text-white px-8 py-4 rounded font-semibold">Sign up with Google</button>
             <button class="shadow bg-[#333] text-white px-8 py-4 rounded font-semibold">Sign up with Github</button>
-            <button class="shadow bg-teal-700 text-white px-8 py-4 rounded font-semibold">Sign up with Email</button>
+            <a href="{% url 'signup' %}" class="text-center shadow bg-teal-700 text-white px-8 py-4 rounded font-semibold">Sign up with Email</a>
         </div>
+        <p class="mt-8 text-sm">
+            Already have an account? 
+            <a href="{% url 'login' %}" class="text-teal-700 underline">Login</a>
+        </p>
     </div>
     <div class="w-full flex-1">
         <img src="{% static 'twitclone/img/landing.jpg' %}" alt="" class="w-full h-screen object-cover">
