@@ -1,11 +1,13 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.http import HttpResponseRedirect
 
 class UserIsAnonymousMixin(UserPassesTestMixin):
     def test_func(self):
-        return not self.request.user.is_authenticated
+        if not self.request.user.is_authenticated:
+            return True
     
-    def get_login_url(self):
-        return '/home/'
+    def handle_no_permission(self):
+        return HttpResponseRedirect('/home/')
     
     def get_redirect_field_name(self):
         return None
