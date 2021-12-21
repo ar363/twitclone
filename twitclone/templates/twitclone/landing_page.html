@@ -1,5 +1,22 @@
 {% extends 'twitclone/base.html' %}
+{% load static %}
 
 {% block content %}
-asdf
+
+<div class="flex text-gray-800 bg-gray-100 h-screen">
+    <div class="w-full max-w-sm p-8 flex flex-col items-start justify-center">
+        <h1 class="text-4xl sm:text-5xl font-medium">Share your thoughts</h1>
+        <h2 class="text-lg sm:text-2xl mt-3 sm:mt-6">Join quack today!</h2>
+
+        <div class="flex flex-col gap-4 mt-12 w-full ">
+            <button class="shadow bg-[#4285f4] text-white px-8 py-4 rounded font-semibold">Sign up with Google</button>
+            <button class="shadow bg-[#333] text-white px-8 py-4 rounded font-semibold">Sign up with Github</button>
+            <button class="shadow bg-teal-700 text-white px-8 py-4 rounded font-semibold">Sign up with Email</button>
+        </div>
+    </div>
+    <div class="w-full flex-1">
+        <img src="{% static 'twitclone/img/landing.jpg' %}" alt="" class="w-full h-screen object-cover">
+    </div>
+</div>
+
 {% endblock %}

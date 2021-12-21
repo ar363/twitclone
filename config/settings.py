@@ -112,6 +112,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'theme' / 'static',
+    BASE_DIR / 'twitclone' / 'static',
 ]
 
 # Default primary key field type
