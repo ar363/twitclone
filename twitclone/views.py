@@ -5,7 +5,9 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
-from .forms import SignupForm, LoginForm
+from twitclone.models import Tweet
+
+from .forms import SignupForm, LoginForm, TweetCreateForm
 from .mixins import UserIsAnonymousMixin
 from .generic import FormView
 
@@ -52,5 +54,19 @@ def homepage(request):
 
 @login_required(login_url='/login/')
 def feed_frame(request):
-    return render(request, 'twitclone/home/frames/feed_frame.html', {})
+    return render(request, 'twitclone/home/frames/feed_frame.html', {
+        'tweets': Tweet.objects.all().order_by('-created_at')
+    })
 
+
+@login_required(login_url='/login/')
+def create_tweet(request):
+    if request.method == 'POST':
+        form = TweetCreateForm(request.POST)
+        if form.is_valid():
+            t = form.save(commit=False)
+            t.author = request.user
+            t.save()
+            return HttpResponseRedirect('/home/_frame/feed/')
+        else:
+            return HttpResponseRedirect('/home/_frame/feed/')

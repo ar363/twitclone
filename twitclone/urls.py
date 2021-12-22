@@ -9,4 +9,6 @@ urlpatterns = [
 
     path('home/', views.homepage, name='home_page'),
     path('home/_frame/feed/', views.feed_frame, name='feed_frame'),
+
+    path('tweet/add/', views.create_tweet, name='frame-add_tweet')
 ]

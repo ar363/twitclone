@@ -1,9 +1,12 @@
+{% load humanize %}
+
 <turbo-frame id="main_app">
-    <div class="sticky px-6 py-3 bg-teal-700 w-full bg-opacity-10">
+    <div class="sticky px-6 py-3 w-full top-0 left-0 backdrop-blur-md bg-teal-700 bg-opacity-10">
         <div class="font-semibold text-xl">Home</div>
     </div>
-    <form action="" method="post">
-        <textarea class="h-36 p-6" placeholder="What's happening?" aria-label="Write tweet"></textarea>
+    <form action="/tweet/add/" method="post">
+        {% csrf_token %}
+        <textarea id="tweet" name="text" class="h-36 p-6" placeholder="What's happening?" aria-label="Write tweet"></textarea>
         <div class="flex items-center justify-between px-4 pb-2 border-b-2 border-b-gray-300">
             <div class=""></div>
             <div class="">
@@ -11,4 +14,36 @@
             </div>
         </div>
     </form>
+    <div class="">
+        {% for tweet in tweets %}
+            <div class="p-8 border-b-2 border-b-gray-300 flex gap-4">
+                <div class="">
+                    {% if tweet.author.profile_photo %}
+                    <img src="{{ tweet.author.profile_photo.url }}" alt="@{{ tweet.author.username }}'s profile picture"
+                        class="w-8 h-8 object-cover rounded-full" />
+                    {% else %}
+                    <img src="https://pfpgen.deta.dev/?username={{ tweet.author.username | urlencode }}&name={{ tweet.author.get_full_name | urlencode }}"
+                        alt="@{{ tweet.author.username }}'s profile picture" class="w-8 h-8 object-cover rounded-full" />
+                    {% endif %}
+                </div>
+                <div class="">
+                    <div class="text-sm text-gray-700 flex gap-1 flex-col sm:flex-row">
+                        <div class="flex gap-1">
+                            <div class="font-bold">
+                                {% if tweet.author.get_full_name %}
+                                    {{ tweet.author.get_full_name }}
+                                {% else %}
+                                    {{ tweet.author.username }}
+                                {% endif %}
+                            </div>
+                            <div class="">  &middot; @{{ tweet.author.username }}</div>
+                        </div>
+                        <div class="mb-4 sm:mb-1"><span class="hidden sm:inline">  &middot; </span>
+                            {{ tweet.created_at | naturaltime }}</div>
+                    </div>
+                    <div class="text-xl">{{ tweet.text }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </turbo-frame>
