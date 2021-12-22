@@ -28,7 +28,7 @@ media
 .Python
 build/
 develop-eggs/
-dist/
+theme/static/css/dist/styles.css
 downloads/
 eggs/
 .eggs/

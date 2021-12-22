@@ -22,6 +22,9 @@ ALLOWED_HOSTS = [i for i in (os.getenv('ALLOWED_HOSTS') or '').split(',') if i]
 # Application definition
 
 INSTALLED_APPS = [
+    'tailwind',
+    'theme',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,9 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',
-
-    'tailwind',
-    'theme',
 
     'social_django',
 
