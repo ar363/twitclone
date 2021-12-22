@@ -48,4 +48,9 @@ def logout_view(request):
 
 @login_required(login_url='/login/')
 def homepage(request):
-    return render(request, 'twitclone/home.html', {})
+    return render(request, 'twitclone/home/index.html', {})
+
+@login_required(login_url='/login/')
+def feed_frame(request):
+    return render(request, 'twitclone/home/frames/feed_frame.html', {})
+

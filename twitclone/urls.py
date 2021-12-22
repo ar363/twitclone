@@ -8,4 +8,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     path('home/', views.homepage, name='home_page'),
+    path('home/_frame/feed/', views.feed_frame, name='feed_frame'),
 ]
