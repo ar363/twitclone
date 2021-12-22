@@ -5,6 +5,18 @@ from django.contrib.staticfiles.management.commands.collectstatic import (
 
 
 class Command(CollectStaticCommand):
+    def add_arguments(self, parser):
+        
+        parser.add_argument(
+            '--skiptw',
+            action='store_true',
+            help='Skip tailwind build',
+        )
+
+        return super().add_arguments(parser)
+
     def handle(self, *args, **options):
-        call_command("tailwind", "build")
+        if options['skiptw']:
+            call_command("tailwind", "build")
+        
         super().handle(*args, **options)
