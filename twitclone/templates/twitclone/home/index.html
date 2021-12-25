@@ -10,7 +10,7 @@
                 {% include 'twitclone/partials/loading_spinner.html' %}
             </turbo-frame>
         </div>
-        <div class="w-full hidden sm:block sm:basis-1/2 md:basis-2/3 p-4">
+        <div class="w-full hidden sm:block sm:basis-1/2 md:basis-2/3 p-4 sticky top-0 right-0 h-screen">
             <form action="/search/" method="GET" class="">
                 <input name="q" value="{{ q }}" type="search" 
                     class="border-gray-100 bg-gray-100" aria-abel="Search..."
