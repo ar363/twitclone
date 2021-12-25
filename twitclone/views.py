@@ -95,7 +95,8 @@ def profile(request):
         if form.is_valid():
             u = User.objects.get(id=request.user.id)
             for k in form.data:
-                setattr(u, k, form.data[k])
+                if k != 'profile_picture':
+                    setattr(u, k, form.data[k])
             if 'profile_picture' in request.FILES:
                 u.profile_picture = request.FILES['profile_picture']
             u.save()
