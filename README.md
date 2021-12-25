@@ -17,23 +17,22 @@ Built with:
 
 Install the requirements
 
-`
+```
 pip install -r requirements.txt
-`
-
-`
 python manage.py tailwind install
-`
+```
 
 
 Run Tailwind build
-
-`python manage.py tailwind start`
+```
+python manage.py tailwind start
+```
 
 
 Run Django server
-
-`python manage.py runserver`
+```
+python manage.py runserver
+```
 
 ## Todo:
  - add reply and retweet features
