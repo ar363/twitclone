@@ -55,6 +55,18 @@ select:focus {
   @apply text-red-600;
 }
 
+.form_group.has_file a {
+  @apply block mb-4;
+}
+
+.form_group.has_file > input[type=checkbox] + label {
+  @apply inline-block mb-4;
+}
+
+.form_group.has_file > label:nth-of-type(1) {
+  @apply mb-1 mt-6 font-semibold;
+}
+
 .logo, .nav-link {
   @apply px-4 py-3
     hover:bg-gray-300 rounded-lg;

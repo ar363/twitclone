@@ -5,9 +5,9 @@ from django.contrib.auth import authenticate, login,logout
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.db.models import Q
 
-from twitclone.models import Tweet
+from twitclone.models import Tweet, User
 
-from .forms import SignupForm, LoginForm, TweetCreateForm
+from .forms import ProfileForm, SignupForm, LoginForm, TweetCreateForm
 from .mixins import UserIsAnonymousMixin
 from .generic import FormView
 
@@ -77,6 +77,32 @@ def search_frame(request):
             ).order_by('-created_at'),
         'q': q
     })
+
+@login_required(login_url='/login/')
+def profile(request):
+    if request.method == 'GET':
+        return render(request, 'twitclone/home/profile.html', {
+            'form': ProfileForm(initial={
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name,
+                'username': request.user.username,
+                'profile_picture': request.user.profile_picture,
+                'bio': request.user.bio,
+            })
+        })
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            u = User.objects.get(id=request.user.id)
+            for k in form.data:
+                setattr(u, k, form.data[k])
+            if 'profile_picture' in request.FILES:
+                u.profile_picture = request.FILES['profile_picture']
+            u.save()
+        else:
+            print(form.errors)
+        
+        return HttpResponseRedirect('/home/me/')
 
 @login_required(login_url='/login/')
 def create_tweet(request):

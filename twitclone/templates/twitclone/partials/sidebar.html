@@ -34,7 +34,7 @@
             </div>
             <div class="nav-link__text">Notifications</div>
         </a>
-        <a href="/home/" class="nav-link">
+        <a href="/home/me/" class="nav-link">
             <div class="nav-link__icon">
 
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -59,9 +59,9 @@
     </div>
     <div class="flex items-center justify-center lg:justify-between py-4 lg:p-4">
         <div class="flex items-center gap-4">
-            <div class="">
-                {% if user.profile_photo %}
-                <img src="{{ user.profile_photo.url }}" alt="@{{ user.username }}'s profile picture"
+            <div class="flex-grow flex-shrink-0">
+                {% if user.profile_picture %}
+                <img src="{{ user.profile_picture.url }}" alt="@{{ user.username }}'s profile picture"
                     class="w-6 h-6 lg:w-12 lg:h-12 object-cover rounded-full" />
                 {% else %}
                 <img src="https://pfpgen.deta.dev/?username={{ user.username | urlencode }}&name={{ user.get_full_name | urlencode }}"

@@ -53,8 +53,8 @@ class User(AbstractUser):
         RegexValidator('[a-zA-Z0-9\-_]+', 'Username can only contain letters, numbers, dashes and underscores')
     ])
     email = models.EmailField()
-    bio = models.TextField(max_length=280)
-    profile_picture = models.ImageField()
+    bio = models.TextField(max_length=280, blank=True, null=True)
+    profile_picture = models.ImageField(blank=True, null=True, help_text='Max 250kb')
 
     objects = UserManager()
 

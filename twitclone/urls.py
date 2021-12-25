@@ -11,6 +11,7 @@ urlpatterns = [
     path('search/', views.searchpage, name='search_page'),
     path('home/_frame/feed/', views.feed_frame, name='feed_frame'),
     path('home/_frame/search/', views.search_frame, name='search_frame'),
+    path('home/me/', views.profile, name='profile_frame'),
 
     path('tweet/add/', views.create_tweet, name='frame-add_tweet')
 ]

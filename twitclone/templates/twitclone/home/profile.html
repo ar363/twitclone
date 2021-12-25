@@ -1,0 +1,43 @@
+{% extends 'twitclone/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="px-1 md:px-2 lg:px-4 max-w-screen-xl mx-auto">
+    <div class="flex min-h-screen items-stretch gap-2">
+        {% include 'twitclone/partials/sidebar.html' %}
+        <div class="w-full border-x-2 border-x-gray-300 relative p-8">
+            <h1 class="text-2xl font-bold">My profile</h1>
+            <form class="mt-12" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+    
+                {% for field in form %}
+                <div class="form_group has_file">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                    <div class="text-xs text-gray-700">{{ field.help_text }}</div>
+                    {% endif %}
+                    {{ field.errors }}
+                </div>
+                {% endfor %}
+    
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="bg-red-600 text-white p-4 rounded mb-4">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+    
+                <button type="submit" class="bg-teal-700 text-white font-semibold rounded w-full px-4 py-3">Save Profile</button>
+            </form>
+        </div>
+        <div class="w-full hidden sm:block sm:basis-1/2 md:basis-2/3 p-4">
+            <form action="/search/" method="GET" class="">
+                <input name="q" value="{{ q }}" type="search" 
+                    class="border-gray-100 bg-gray-100" aria-abel="Search..."
+                    placeholder="Search..."
+                    autocomplete="off" autocapitalize="off">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

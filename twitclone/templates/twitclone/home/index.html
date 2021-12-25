@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="px-1 md:px-2 lg:px-4 max-w-screen-xl mx-auto">
-    <div class="flex min-h-screen items-stretch gap-2 md:gap-6">
+    <div class="flex min-h-screen items-stretch gap-2">
         {% include 'twitclone/partials/sidebar.html' %}
         <div class="w-full border-x-2 border-x-gray-300 relative">
             <turbo-frame id="main_app" src="{% if not q %}/home/_frame/feed/{% else %}/home/_frame/search/?q={{ q | urlencode }}{% endif %}">
