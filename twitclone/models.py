@@ -54,7 +54,7 @@ class User(AbstractUser):
     ])
     email = models.EmailField()
     bio = models.TextField(max_length=280, blank=True, null=True)
-    profile_picture = models.ImageField(blank=True, null=True, help_text='Max 250kb')
+    profile_picture = models.ImageField(blank=True, null=True)
 
     objects = UserManager()
 

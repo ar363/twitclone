@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='profile_picture',
-            field=models.ImageField(blank=True, help_text='Max 250kb', null=True, upload_to=''),
+            field=models.ImageField(blank=True, null=True, upload_to=''),
         ),
     ]
