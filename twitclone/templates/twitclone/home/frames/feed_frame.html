@@ -2,7 +2,13 @@
 
 <turbo-frame id="main_app">
     <div class="px-6 py-3 w-full bg-teal-700 bg-opacity-10">
-        <div class="font-semibold text-xl">Home</div>
+        <div class="font-semibold text-xl">
+            {% if q %}
+                Search for "{{ q }}"
+            {% else %}
+                Home
+            {% endif %}
+        </div>
     </div>
     <form action="/tweet/add/" method="post">
         {% csrf_token %}

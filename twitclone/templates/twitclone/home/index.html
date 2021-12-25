@@ -6,11 +6,18 @@
     <div class="flex min-h-screen items-stretch gap-2 md:gap-6">
         {% include 'twitclone/partials/sidebar.html' %}
         <div class="w-full border-x-2 border-x-gray-300 relative">
-            <turbo-frame id="main_app" src="/home/_frame/feed">
+            <turbo-frame id="main_app" src="{% if not q %}/home/_frame/feed/{% else %}/home/_frame/search/?q={{ q | urlencode }}{% endif %}">
                 {% include 'twitclone/partials/loading_spinner.html' %}
             </turbo-frame>
         </div>
-        <div class="w-full hidden sm:block sm:basis-1/2 md:basis-2/3">c</div>
+        <div class="w-full hidden sm:block sm:basis-1/2 md:basis-2/3 p-4">
+            <form action="/search/" method="GET" class="">
+                <input name="q" value="{{ q }}" type="search" 
+                    class="border-gray-100 bg-gray-100" aria-abel="Search..."
+                    placeholder="Search..."
+                    autocomplete="off" autocapitalize="off">
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
